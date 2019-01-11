@@ -1,4 +1,4 @@
-let env = process.env.NODE_ENV || 'development'; //in case of production and test there will be an env variable
+let env = process.env.NODE_ENV || 'development'; //in case of production and test there will be an env letiable
 
 //console.log('env ****', env);
 

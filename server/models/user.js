@@ -4,7 +4,7 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 
-var UserSchema = new mongoose.Schema({
+let UserSchema = new mongoose.Schema({
   email:{
     type:String,
     required:true,
@@ -31,15 +31,15 @@ var UserSchema = new mongoose.Schema({
 });
 
 UserSchema.methods.toJSON = function(){
-  var user = this;
-  var userObject = user.toObject();
+  let user = this;
+  let userObject = user.toObject();
 
   return _.pick(userObject, ['_id', 'email']);
 }
 
 UserSchema.methods.generateAuthToken = function(){
   //we have to use a normal fn here because arrow fns do not have this keyword
-  var user = this;
+  let user = this;
   let access = 'auth';
   let token = jwt.sign({_id: user._id.toHexString(), access}, 'abc123').toString();
 
@@ -48,8 +48,29 @@ UserSchema.methods.generateAuthToken = function(){
       return token;
   }); //we are returning this value to the server file where we can use another .then
 };
+//.static is used to create model methods
+UserSchema.statics.findByToken = function(token){
+  let User= this; //notice the capital U
+  let decoded;
 
-var User = mongoose.model('User', UserSchema);
+  try{
+    decoded = jwt.verify(token, 'abc123');
+  }catch(e){
+    // return new Promise((resolve, reject)=>{
+    //   reject();
+    // });
+    return Promise.reject('');
+  }
+
+  //in case of success
+  return User.findOne({
+    '_id': decoded._id,
+    'tokens.token':token, //quotes are required if there is  a dot in the value
+    'tokens.access' :'auth'
+  });
+};
+
+let User = mongoose.model('User', UserSchema);
 
 
 module.exports = {

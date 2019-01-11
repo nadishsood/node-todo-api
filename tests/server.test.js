@@ -27,7 +27,7 @@ beforeEach((done)=>{
 
 describe('POST /todos', ()=>{
   it('should create a new todo', (done)=>{
-    var text = 'Test todo text';
+    let text = 'Test todo text';
 
     request(app)
       .post('/todos')
@@ -91,7 +91,7 @@ describe('GET /todos/:id', ()=>{
   });
 
   it('should return 404 if todo not found', (done)=>{
-    var hexId = new ObjectID().toHexString();
+    let hexId = new ObjectID().toHexString();
 
     request(app)
       .get(`/todos/${hexId}`)
@@ -109,7 +109,7 @@ describe('GET /todos/:id', ()=>{
 
 describe('DELETE /todos/:id', ()=>{
   it('should remove a todo', (done)=>{
-    var hexId = todos[0]._id.toHexString();
+    let hexId = todos[0]._id.toHexString();
 
     request(app)
       .delete(`/todos/${hexId}`)
@@ -131,7 +131,7 @@ describe('DELETE /todos/:id', ()=>{
   });
 
   it('should return a 404 if todo not found', (done)=>{
-    var hexId = new ObjectID().toHexString();
+    let hexId = new ObjectID().toHexString();
 
     request(app)
       .get(`/todos/${hexId}`)
@@ -150,7 +150,7 @@ describe('DELETE /todos/:id', ()=>{
 
 describe("PATCH /todos/:id", ()=>{
   it('should update the todo', (done)=>{
-    var id = todos[0]._id.toHexString();
+    let id = todos[0]._id.toHexString();
     request(app)
       .patch(`/todos/${id}`)
       .send({
@@ -167,7 +167,7 @@ describe("PATCH /todos/:id", ()=>{
   });
 
   it('should remove completedAt when the todo is not completed', (done)=>{
-    var id = todos[1]._id.toHexString();
+    let id = todos[1]._id.toHexString();
     request(app)
       .patch(`/todos/${id}`)
       .send({
