@@ -21,7 +21,7 @@ app.post('/todos', (req, res) =>{
 
   let todo = new Todo({
     text: req.body.text
-  })
+  });
 
 
   todo.save().then((doc)=>{
@@ -32,6 +32,7 @@ app.post('/todos', (req, res) =>{
   })
 
 });
+
 
 app.get('/todos', (req, res) =>{
   Todo.find().then((todos)=>{
@@ -121,7 +122,7 @@ app.post('/users', (req, res)=>{
 });
 
 
-
+//GET /users/me
 app.get('/users/me', authenticate, (req, res)=>{
   res.send(req.user);
 })
