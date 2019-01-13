@@ -1,7 +1,7 @@
 require('./config/config.js');
 
 //library imports
-const _ = require('lodash')
+const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');//takes JSON and converts to object
 const {ObjectID} = require('mongodb');
@@ -47,13 +47,13 @@ app.get('/todos/:id', (req, res)=>{
   let id = req.params.id;
 
   if(!ObjectID.isValid(id)){
-    res.status(404).send();
+    return res.status(404).send();
   }
 
   else{
     Todo.findById(id).then((todo)=>{
       if(!todo){
-        res.status(404).send();
+        return res.status(404).send();
       }
       res.send({todo});
     }, (e)=>{
@@ -66,13 +66,13 @@ app.delete('/todos/:id', (req, res)=>{
   let id = req.params.id;
 
   if(!ObjectID.isValid(id)){
-    res.status(404).send();
+    return res.status(404).send();
   }else{
     Todo.findByIdAndRemove(id).then((todo)=>{
       if(!todo){
-        res.status(404).send();
+        return res.status(404).send();
       }else{
-        res.send({todo});
+        return res.send({todo});
       }
     }, (e)=>{
       res.status(400).send();
