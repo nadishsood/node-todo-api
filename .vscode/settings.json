@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": true,
+    "editor.fontSize": 16,
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "terminal.integrated.fontSize": 16
+}
