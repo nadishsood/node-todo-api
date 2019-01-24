@@ -57,7 +57,9 @@ describe('POST /todos', () => {
   });
 });
 
+
 describe('GET /todos', () => {
+
   it('should get all todos', (done) => {
     request(app)
       .get('/todos')
@@ -70,7 +72,9 @@ describe('GET /todos', () => {
   });
 });
 
+
 describe('GET /todos/:id', () => {
+
   it('should return todo doc', (done) => {
     request(app)
       .get(`/todos/${todos[0]._id.toHexString()}`)
@@ -109,7 +113,9 @@ describe('GET /todos/:id', () => {
   })
 });
 
+
 describe('DELETE /todos/:id', () => {
+
   it('should remove a todo', (done) => {
     let hexId = todos[1]._id.toHexString();
 
@@ -175,7 +181,9 @@ describe('DELETE /todos/:id', () => {
   });
 });
 
+
 describe('PATCH /todos/:id', () => {
+
   it('should update the todo', (done) => {
     var hexId = todos[0]._id.toHexString();
     var text = 'This should be the new text';
@@ -232,7 +240,9 @@ describe('PATCH /todos/:id', () => {
   });
 });
 
+
 describe('GET /users/me', () => {
+
   it('should return user if authenticated', (done) => {
     request(app)
       .get('/users/me')
@@ -256,7 +266,9 @@ describe('GET /users/me', () => {
   })
 });
 
+
 describe('POST /users', () => {
+
   it('should create a user', (done) => {
     var email = 'example@example.com';
     var password = '123mnb!'
@@ -305,7 +317,9 @@ describe('POST /users', () => {
   });
 });
 
+
 describe('POST /users/login', () => {
+
   it('should login user and return the auth token ', (done) => {
     request(app)
       .post('/users/login')
@@ -356,7 +370,9 @@ describe('POST /users/login', () => {
   });
 });
 
+
 describe('DELETE /users/me/token', () => {
+
   it('should remove auth token on logout', (done) => {
     request(app)
       .delete('/users/me/token')
